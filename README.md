@@ -35,11 +35,41 @@ let package = Package(
 
 ## Usage 🚀
 
-To do.
+To run commands in the system, you need to create an instance of `Shell`:
+
+```swift
+let shell = Shell()
+```
+
+Shell exposes methods for running the commands synchronously, asynchronously, and capturing the output:
+
+```swift
+// Synchronous running
+let result = shell.sync("xcodebuild", "-project", "Shell", "-scheme", "Shell")
+
+// Asynchronous running
+shell.async("xcodebuild", "-project", "Shell", "-scheme", "Shell", onCompletion: { result in
+  // Process the result
+})
+
+// Capturing output
+let result = shell.capture("xcode-select", "-p")
+```
 
 ## Testing ✅
 
-To do.
+We understand how inconvenient testing might be in Swift and thus, we designed Shell's API to facilitate testing by avoiding many syntactic sugar and static interfaces. The library comes with a library, `ShellTesting` that you can import in your tests target to mock the `Shell` interface and stub the result of running commands:
+
+```swift
+import ShellTesting
+
+let mock = Shell.mock()
+let xcodebuild = XcodeBuild(shell: mock)
+
+shell.succeed("xcodebuild", "-project", "Shell.xcodeproj", "-scheme", "Shell")
+
+XCTAssertNoThrow(try xcodebuild.build(project: "Shell.xcodeproj", scheme: "Shell"))
+```
 
 ## Setup for development 👩‍💻
 
