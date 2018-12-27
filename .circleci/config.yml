@@ -35,9 +35,9 @@ jobs:
           command: |
             swift package generate-xcodeproj
       - run:
-          name: Build for release
+          name: Build
           command: |
-            swift build -c release
+            swift build
       - run:
           name: Run tests
           command: xcodebuild test -scheme Shell-Package -project Shell.xcodeproj -enableCodeCoverage YES
