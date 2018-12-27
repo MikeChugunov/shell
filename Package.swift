@@ -9,11 +9,12 @@ let package = Package(
         .library(name: "ShellTesting", targets: ["ShellTesting"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/kylef/PathKit.git", .upToNextMinor(from: "0.9.2")),
     ],
     targets: [
         .target(
             name: "Shell",
-            dependencies: []
+            dependencies: ["PathKit"]
         ),
         .target(
             name: "ShellTesting",
