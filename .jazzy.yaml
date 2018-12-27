@@ -1,5 +1,5 @@
 author: Tuist
-module: shell
+module: Shell
 github_url: https://github.com/tuist/shell
 copyright: 'Copyright © from 2018 Pedro Piñera Buendía. All rights reserved.'
 readme: ABOUT.md
@@ -7,7 +7,7 @@ sdk: macosx
 min_acl: internal
 xcodebuild_arguments:
   - -project
-  - shell.xcodeproj
+  - Shell.xcodeproj
   - -scheme
-  - shell-Package
+  - Shell-Package
 skip_undocumented: true
