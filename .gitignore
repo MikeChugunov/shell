@@ -98,4 +98,4 @@ Carthage/Checkouts
 Carthage/Builds
 *.profraw
 TODO
-*.xcodeproj
+Shell.xcodeproj
