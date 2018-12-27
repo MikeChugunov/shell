@@ -99,3 +99,4 @@ Carthage/Builds
 *.profraw
 TODO
 Shell.xcodeproj
+Shell.framework.zip
