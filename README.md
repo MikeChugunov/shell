@@ -33,6 +33,22 @@ let package = Package(
 )
 ```
 
+### CocoaPods
+
+Add the following line to your project Podfile:
+
+```ruby
+pod "Shell", "0.1.0"
+```
+
+### Carthage
+
+Add the following line to your project Cartfile:
+
+```ruby
+github "tuist/shell" "0.1.0"
+```
+
 ## Usage 🚀
 
 To run commands in the system, you need to create an instance of `Shell`:
