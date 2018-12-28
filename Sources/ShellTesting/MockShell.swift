@@ -16,7 +16,7 @@ public final class MockShell: Shell {
     /// Stubs the given command to succeed.
     ///
     /// - Parameter argument: Command arguments.
-    func succeed(_ argument: [String]) {
+    public func succeed(_ argument: [String]) {
         stub(argument,
              code: 0)
     }
@@ -27,7 +27,7 @@ public final class MockShell: Shell {
     ///   - arguments: Command arguments.
     ///   - stderr: Stub standard error output.
     ///   - code: Stub exit code.
-    func error(_ arguments: [String], stderr: [String], code: Int32 = 1) {
+    public func error(_ arguments: [String], stderr: [String], code: Int32 = 1) {
         stub(arguments,
              stder: stderr,
              code: code)
@@ -43,7 +43,7 @@ public final class MockShell: Shell {
     ///   - stdout: Stub standard output.
     ///   - stder: Stub standard error output.
     ///   - code: Stub exit code.
-    func stub(_ arguments: [String],
+    public func stub(_ arguments: [String],
               shouldBeTerminatedOnParentExit: Bool = true,
               workingDirectoryPath: Path? = nil,
               env: [String: String]? = nil,
