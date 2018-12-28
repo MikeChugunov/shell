@@ -156,7 +156,7 @@ public class Shell {
                                                      error.append(string)
                                                  }
         })
-        return ShellResult(stdout: error,
+        return ShellResult(stdout: output,
                            stderr: error,
                            reason: result.reason,
                            code: result.code)
