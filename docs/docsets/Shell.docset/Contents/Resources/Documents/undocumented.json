@@ -1,0 +1,47 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/Environment.swift",
+      "line": 4,
+      "symbol": "EnvironmentProtocol",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/Environment.swift",
+      "line": 19,
+      "symbol": "Environment",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ProcessError.swift",
+      "line": 3,
+      "symbol": "ShellError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ProcessRunner.swift",
+      "line": 4,
+      "symbol": "ProcessRunning",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ProcessRunner.swift",
+      "line": 53,
+      "symbol": "ProcessRunner",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ShellResult.swift",
+      "line": 3,
+      "symbol": "ShellResult",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/pedropinera/src/github.com/tuist/shell"
+}

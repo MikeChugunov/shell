@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Shell"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "Shell is a µ-library written Swift to run system commands"
   s.homepage         = "https://github.com/tuist/shell"
   s.social_media_url = 'https://twitter.com/pepibumur'
