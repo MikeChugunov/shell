@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.osx.deployment_target = '10.10'
 
-  s.source_files = "Sources/**/*.{swift}"
+  s.source_files = "Sources/Shell/**/*.{swift}"
 
   s.dependency "PathKit", "0.9.2"
 end
