@@ -4,6 +4,10 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+### Added
+
+- Add `Shell.lookupExecutable` method https://github.com/tuist/shell/pull/2 by @pepibumur.
+
 ## 0.2.0
 
 ### Changed
