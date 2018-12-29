@@ -44,12 +44,12 @@ public final class MockShell: Shell {
     ///   - stder: Stub standard error output.
     ///   - code: Stub exit code.
     public func stub(_ arguments: [String],
-              shouldBeTerminatedOnParentExit: Bool = true,
-              workingDirectoryPath: Path? = nil,
-              env: [String: String]? = nil,
-              stdout: [String] = [],
-              stder: [String] = [],
-              code: Int32 = 0) {
+                     shouldBeTerminatedOnParentExit: Bool = true,
+                     workingDirectoryPath: Path? = nil,
+                     env: [String: String]? = nil,
+                     stdout: [String] = [],
+                     stder: [String] = [],
+                     code: Int32 = 0) {
         (runner as! MockProcessRunner).stub(arguments: arguments,
                                             shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
                                             workingDirectoryPath: workingDirectoryPath,

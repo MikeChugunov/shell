@@ -28,7 +28,7 @@ extension String {
     /// hello -> hello, hello$world -> 'hello$world', input A -> 'input A'
     ///
     /// - Returns: Shell escaped string.
-    public func shellEscaped() -> String {
+    func shellEscaped() -> String {
         // If all the characters in the string are in whitelist then no need to escape.
         guard let pos = utf8.index(where: { !inShellWhitelist($0) }) else {
             return self
@@ -56,7 +56,7 @@ extension String {
     }
 
     /// Shell escapes the current string. This method is mutating version of shellEscaped().
-    public mutating func spm_shellEscape() {
+    mutating func shellEscape() {
         self = shellEscaped()
     }
 }
