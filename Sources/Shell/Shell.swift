@@ -19,6 +19,16 @@ public class Shell {
         self.runner = runner
     }
 
+    /// Looks up an executable with the given name and returns its path if it was found.
+    ///
+    /// - Parameter name: Executable name.
+    /// - Returns: Executable path.
+    public static func lookupExecutable(_ name: String) -> Path? {
+        let environment = Environment()
+        let searchPaths = environment.searchPaths()
+        return environment.lookupExecutable(name: name, in: searchPaths)
+    }
+
     /// Runs a given command and returns its result synchronously.
     ///
     /// - Parameter arguments: Command arguments.
