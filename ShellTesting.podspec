@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = "Shell"
+  s.name             = "ShellTesting"
   s.version          = "0.3.1"
   s.summary          = "Shell is a µ-library written Swift to run system commands"
   s.homepage         = "https://github.com/tuist/shell"
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.osx.deployment_target = '10.10'
 
-  s.source_files = "Sources/Shell/**/*.{swift}"
+  s.source_files = "Sources/ShellTesting/**/*.{swift}"
 
-  s.dependency "PathKit", "0.9.2"
+  s.dependency "Shell", "0.3.1"
 end
