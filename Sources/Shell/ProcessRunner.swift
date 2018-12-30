@@ -1,7 +1,7 @@
 import Foundation
 import PathKit
 
-protocol ProcessRunning {
+public protocol ProcessRunning {
     /// Runs the process synchronously and returns the result.
     ///
     /// - Parameters:
@@ -42,15 +42,25 @@ protocol ProcessRunning {
 }
 
 /// Process runner result.
-struct ProcessRunnerResult {
+public struct ProcessRunnerResult {
     /// Terminatino reason.
     let reason: Process.TerminationReason
 
     /// Exit code.
     let code: Int32
+    
+    /// Initializes the result with its attributes.
+    ///
+    /// - Parameters:
+    ///   - reason: Termination reason.
+    ///   - code: Termination code.
+    public init(reason: Process.TerminationReason, code: Int32) {
+        self.reason = reason
+        self.code = code
+    }
 }
 
-final class ProcessRunner: ProcessRunning {
+public final class ProcessRunner: ProcessRunning {
     /// Instance to interact with the environment.
     private let environment: EnvironmentProtocol
 
@@ -72,7 +82,7 @@ final class ProcessRunner: ProcessRunning {
     ///   - onStderr: Called when new data is forwarded through the standard error.
     /// - Returns: Task execution result.
     /// - Throws: A TaskError if the launch argument can't be found in the environment.
-    func runSync(arguments: [String],
+    public func runSync(arguments: [String],
                  shouldBeTerminatedOnParentExit: Bool,
                  workingDirectoryPath: Path?,
                  env: [String: String]? = nil,
@@ -108,7 +118,7 @@ final class ProcessRunner: ProcessRunning {
     ///   - onCompletion: Called when the task completes.
     /// - Returns: Task execution result.
     /// - Throws: A TaskError if the launch argument can't be found in the environment.
-    func runAsync(arguments: [String],
+    public func runAsync(arguments: [String],
                   shouldBeTerminatedOnParentExit: Bool,
                   workingDirectoryPath: Path?,
                   env: [String: String]?,

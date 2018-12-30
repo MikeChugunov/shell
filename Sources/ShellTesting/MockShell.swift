@@ -1,7 +1,6 @@
 import Foundation
 import PathKit
-
-@testable import Shell
+import Shell
 
 public extension Shell {
     /// Returns a mock instance for testing purposes.

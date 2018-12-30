@@ -1,7 +1,6 @@
 import Foundation
 import PathKit
-
-@testable import Shell
+import Shell
 
 final class MockProcessRunner: ProcessRunning {
     struct StubbedCommand: Hashable {

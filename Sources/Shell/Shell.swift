@@ -3,9 +3,9 @@ import class Foundation.ProcessInfo
 import PathKit
 
 /// Class tu run commands in the system.
-public class Shell {
+open class Shell {
     /// Process runner.
-    let runner: ProcessRunning
+    public let runner: ProcessRunning
 
     /// Public constructor.
     public convenience init() {
@@ -15,7 +15,7 @@ public class Shell {
     /// Initializes the shell with its attributes.
     ///
     /// - Parameter runner: Instance to run the commands in the system.
-    init(runner: ProcessRunning) {
+    public init(runner: ProcessRunning) {
         self.runner = runner
     }
 
