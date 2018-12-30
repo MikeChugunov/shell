@@ -4,6 +4,12 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 0.3.2
+
+### Fixed
+
+- Remove `@testable` imports from ShellTesting by @pepibumur.
+
 ## 0.3.1
 
 ### Added
