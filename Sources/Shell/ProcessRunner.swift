@@ -84,7 +84,11 @@ public final class ProcessRunner: ProcessRunning {
         process.waitUntilExit()
 
         return queue.sync {
-            .failure(.shell(reason: process.terminationReason, code: process.terminationStatus))
+            if process.terminationStatus != 0 {
+                return .failure(.shell(reason: process.terminationReason, code: process.terminationStatus))
+            } else {
+                return .success(())
+            }
         }
     }
 
@@ -121,7 +125,11 @@ public final class ProcessRunner: ProcessRunning {
         let process = processResult.value!
         process.launch()
         process.terminationHandler = { process in
-            onCompletion(.failure(.shell(reason: process.terminationReason, code: process.terminationStatus)))
+            if process.terminationStatus != 0 {
+                onCompletion(.failure(.shell(reason: process.terminationReason, code: process.terminationStatus)))
+            } else {
+                onCompletion(.success(()))
+            }
         }
     }
 
