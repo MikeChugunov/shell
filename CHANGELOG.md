@@ -4,6 +4,10 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+### Removed
+
+- **Breaking** Remove throws that are not required https://github.com/tuist/shell/pull/4 by @pepibumur
+
 ## 1.0.1
 
 ### Fixed

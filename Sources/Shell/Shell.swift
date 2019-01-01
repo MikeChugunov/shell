@@ -79,7 +79,7 @@ open class Shell {
     /// - Parameters:
     ///   - arguments: Command arguments.
     ///   - onCompletion: Closure to notify the completion of the task.
-    public func async(_ arguments: [String], onCompletion: @escaping (Result<Void, ShellError>) -> Void) throws {
+    public func async(_ arguments: [String], onCompletion: @escaping (Result<Void, ShellError>) -> Void) {
         self.async(arguments,
                    shouldBeTerminatedOnParentExit: true,
                    workingDirectoryPath: nil,
@@ -128,7 +128,7 @@ open class Shell {
     ///
     /// - Parameter arguments: Command arguments.
     /// - Returns: The result with either the standard output or a shell error.
-    public func capture(_ arguments: [String]) throws -> Result<String, ShellError> {
+    public func capture(_ arguments: [String]) -> Result<String, ShellError> {
         return self.capture(arguments, workingDirectoryPath: nil, env: nil)
     }
 
