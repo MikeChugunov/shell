@@ -1,6 +1,7 @@
 import Foundation
 import class Foundation.ProcessInfo
 import PathKit
+import Result
 
 /// Class tu run commands in the system.
 open class Shell {
@@ -33,14 +34,13 @@ open class Shell {
     ///
     /// - Parameter arguments: Command arguments.
     /// - Returns: Command result.
-    /// - Throws: An error if the task cannot be launched.
-    public func sync(_ arguments: [String]) throws -> ShellResult {
-        return try self.sync(arguments,
-                             shouldBeTerminatedOnParentExit: true,
-                             workingDirectoryPath: nil,
-                             env: nil,
-                             onStdout: nil,
-                             onStderr: nil)
+    public func sync(_ arguments: [String]) -> Result<Void, ShellError> {
+        return self.sync(arguments,
+                         shouldBeTerminatedOnParentExit: true,
+                         workingDirectoryPath: nil,
+                         env: nil,
+                         onStdout: nil,
+                         onStderr: nil)
     }
 
     /// Runs a given command and returns its result synchronously.
@@ -53,26 +53,25 @@ open class Shell {
     ///   - onStdout: Closure to send the standard output through.
     ///   - onStderr: Closure to send the standard error through.
     /// - Returns: Command result.
-    /// - Throws: An error if the task cannot be launched.
     public func sync(_ arguments: [String],
                      shouldBeTerminatedOnParentExit: Bool,
                      workingDirectoryPath: Path?,
                      env: [String: String]?,
                      onStdout: ((String) -> Void)?,
-                     onStderr: ((String) -> Void)?) throws -> ShellResult {
+                     onStderr: ((String) -> Void)?) -> Result<Void, ShellError> {
         let onStdoutData: (Data) -> Void = { data in
             if let onStdout = onStdout, let string = String(data: data, encoding: .utf8) { onStdout(string) }
         }
         let onStderrData: (Data) -> Void = { data in
             if let onStderr = onStderr, let string = String(data: data, encoding: .utf8) { onStderr(string) }
         }
-        let result = try self.runner.runSync(arguments: arguments,
-                                             shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
-                                             workingDirectoryPath: workingDirectoryPath,
-                                             env: env,
-                                             onStdout: onStdoutData,
-                                             onStderr: onStderrData)
-        return ShellResult(stdout: nil, stderr: nil, reason: result.reason, code: result.code)
+        let result = self.runner.runSync(arguments: arguments,
+                                         shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
+                                         workingDirectoryPath: workingDirectoryPath,
+                                         env: env,
+                                         onStdout: onStdoutData,
+                                         onStderr: onStderrData)
+        return result.flatMapError({ .failure(ShellError(processError: $0)) })
     }
 
     /// Runs a given command and notifies about its completion asynchronously.
@@ -80,15 +79,14 @@ open class Shell {
     /// - Parameters:
     ///   - arguments: Command arguments.
     ///   - onCompletion: Closure to notify the completion of the task.
-    /// - Throws: An error if the task cannot be launched.
-    public func async(_ arguments: [String], onCompletion: @escaping (ShellResult) -> Void) throws {
-        try self.async(arguments,
-                       shouldBeTerminatedOnParentExit: true,
-                       workingDirectoryPath: nil,
-                       env: nil,
-                       onStdout: nil,
-                       onStderr: nil,
-                       onCompletion: onCompletion)
+    public func async(_ arguments: [String], onCompletion: @escaping (Result<Void, ShellError>) -> Void) throws {
+        self.async(arguments,
+                   shouldBeTerminatedOnParentExit: true,
+                   workingDirectoryPath: nil,
+                   env: nil,
+                   onStdout: nil,
+                   onStderr: nil,
+                   onCompletion: onCompletion)
     }
 
     /// Runs a given command and notifies about its completion asynchronously.
@@ -101,41 +99,37 @@ open class Shell {
     ///   - onStdout: Closure to send the standard output through.
     ///   - onStderr: Closure to send the standard error through.
     ///   - onCompletion: Closure to notify the completion of the task.
-    /// - Throws: An error if the task cannot be launched.
     public func async(_ arguments: [String],
                       shouldBeTerminatedOnParentExit: Bool,
                       workingDirectoryPath: Path?,
                       env: [String: String]?,
                       onStdout: ((String) -> Void)?,
                       onStderr: ((String) -> Void)?,
-                      onCompletion: @escaping (ShellResult) -> Void) throws {
+                      onCompletion: @escaping (Result<Void, ShellError>) -> Void) {
         let onStdoutData: (Data) -> Void = { data in
             if let onStdout = onStdout, let string = String(data: data, encoding: .utf8) { onStdout(string) }
         }
         let onStderrData: (Data) -> Void = { data in
             if let onStderr = onStderr, let string = String(data: data, encoding: .utf8) { onStderr(string) }
         }
-        try self.runner.runAsync(arguments: arguments,
-                                 shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
-                                 workingDirectoryPath: workingDirectoryPath,
-                                 env: env,
-                                 onStdout: onStdoutData,
-                                 onStderr: onStderrData,
-                                 onCompletion: { result in
-                                     onCompletion(ShellResult(stdout: nil,
-                                                              stderr: nil,
-                                                              reason: result.reason,
-                                                              code: result.code))
-        })
+        let onRunnerCompletion: (Result<Void, ProcessRunnerError>) -> Void = { result in
+            onCompletion(result.flatMapError({ .failure(ShellError(processError: $0)) }))
+        }
+        self.runner.runAsync(arguments: arguments,
+                             shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
+                             workingDirectoryPath: workingDirectoryPath,
+                             env: env,
+                             onStdout: onStdoutData,
+                             onStderr: onStderrData,
+                             onCompletion: onRunnerCompletion)
     }
 
     /// Runs the given command and returns the captured output.
     ///
     /// - Parameter arguments: Command arguments.
-    /// - Returns: Result of running the command.
-    /// - Throws: An error if the command cannot be run.
-    public func capture(_ arguments: [String]) throws -> ShellResult {
-        return try self.capture(arguments, workingDirectoryPath: nil, env: nil)
+    /// - Returns: The result with either the standard output or a shell error.
+    public func capture(_ arguments: [String]) throws -> Result<String, ShellError> {
+        return self.capture(arguments, workingDirectoryPath: nil, env: nil)
     }
 
     /// Runs the given command and returns the captured output.
@@ -144,31 +138,35 @@ open class Shell {
     ///   - arguments: Command arguments.
     ///   - workingDirectoryPath: Working directory to run the command from.
     ///   - env: Environment variables to be exposed to the command.
-    /// - Returns: Result of running the command.
-    /// - Throws: An error if the command cannot be run.
+    /// - Returns: The result with either the standard output or a shell error.
     public func capture(_ arguments: [String],
                         workingDirectoryPath: Path?,
-                        env: [String: String]?) throws -> ShellResult {
+                        env: [String: String]?) -> Result<String, ShellError> {
         var output = ""
         var error = ""
 
-        let result = try self.runner.runSync(arguments: arguments,
-                                             shouldBeTerminatedOnParentExit: true,
-                                             workingDirectoryPath: workingDirectoryPath,
-                                             env: env,
-                                             onStdout: { stdout in
-                                                 if let string = String(data: stdout, encoding: .utf8) {
-                                                     output.append(string)
-                                                 }
-                                             },
-                                             onStderr: { stderror in
-                                                 if let string = String(data: stderror, encoding: .utf8) {
-                                                     error.append(string)
-                                                 }
-        })
-        return ShellResult(stdout: output,
-                           stderr: error,
-                           reason: result.reason,
-                           code: result.code)
+        let onStdout: (Data) -> Void = { stdout in
+            if let string = String(data: stdout, encoding: .utf8) {
+                output.append(string)
+            }
+        }
+        let onStderr: (Data) -> Void = { stderror in
+            if let string = String(data: stderror, encoding: .utf8) {
+                error.append(string)
+            }
+        }
+
+        let result = self.runner.runSync(arguments: arguments,
+                                         shouldBeTerminatedOnParentExit: true,
+                                         workingDirectoryPath: workingDirectoryPath,
+                                         env: env,
+                                         onStdout: onStdout,
+                                         onStderr: onStderr)
+        if let processError = result.error {
+            let shellError = ShellError(processError: processError, stderr: error)
+            return .failure(shellError)
+        } else {
+            return .success(output)
+        }
     }
 }

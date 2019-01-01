@@ -1,5 +1,6 @@
 import Foundation
 import PathKit
+import Result
 import Shell
 
 final class MockProcessRunner: ProcessRunning {
@@ -36,19 +37,23 @@ final class MockProcessRunner: ProcessRunning {
                  workingDirectoryPath: Path?,
                  env _: [String: String]?,
                  onStdout: @escaping (Data) -> Void,
-                 onStderr: @escaping (Data) -> Void) throws -> ProcessRunnerResult {
+                 onStderr: @escaping (Data) -> Void) -> Result<Void, ProcessRunnerError> {
         let command = arguments.joined(separator: " ")
         guard let stub = stubs[StubbedCommand(arguments: arguments,
                                               shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
                                               workingDirectoryPath: workingDirectoryPath,
                                               env: nil)] else {
             onStderr("command '\(command)' not stubbed".data(using: .utf8)!)
-            return ProcessRunnerResult(reason: .exit, code: 1)
+            return .failure(.shell(reason: .exit, code: 1))
         }
 
         stub.stdout.forEach({ onStdout($0.data(using: .utf8)!) })
         stub.stderr.forEach({ onStderr($0.data(using: .utf8)!) })
-        return ProcessRunnerResult(reason: .exit, code: stub.code)
+        if stub.code == 0 {
+            return .success(())
+        } else {
+            return .failure(.shell(reason: .exit, code: stub.code))
+        }
     }
 
     func runAsync(arguments: [String],
@@ -57,19 +62,23 @@ final class MockProcessRunner: ProcessRunning {
                   env _: [String: String]?,
                   onStdout: @escaping (Data) -> Void,
                   onStderr: @escaping (Data) -> Void,
-                  onCompletion: @escaping (ProcessRunnerResult) -> Void) throws {
+                  onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void) {
         let command = arguments.joined(separator: " ")
         guard let stub = stubs[StubbedCommand(arguments: arguments,
                                               shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
                                               workingDirectoryPath: workingDirectoryPath,
                                               env: nil)] else {
             onStderr("command '\(command)' not stubbed".data(using: .utf8)!)
-            onCompletion(ProcessRunnerResult(reason: .exit, code: 1))
+            onCompletion(.failure(.shell(reason: .exit, code: 1)))
             return
         }
 
         stub.stdout.forEach({ onStdout($0.data(using: .utf8)!) })
         stub.stderr.forEach({ onStderr($0.data(using: .utf8)!) })
-        onCompletion(ProcessRunnerResult(reason: .exit, code: stub.code))
+        if stub.code == 0 {
+            return onCompletion(.success(()))
+        } else {
+            return onCompletion(.failure(.shell(reason: .exit, code: stub.code)))
+        }
     }
 }

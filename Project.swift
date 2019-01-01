@@ -10,6 +10,7 @@ let project = Project(name: "Shell-Carthage",
                                  sources: "Sources/Shell/**",
                                  dependencies: [
                                      .framework(path: "Carthage/Build/Mac/PathKit.framework"),
+                                     .framework(path: "Carthage/Build/Mac/Result.framework"),
                                  ],
                                  settings: Settings(base: ["ENABLE_TESTABILITY": "YES"])),
                           Target(name: "ShellTesting",
@@ -20,6 +21,7 @@ let project = Project(name: "Shell-Carthage",
                                  sources: "Sources/ShellTesting/**",
                                  dependencies: [
                                      .framework(path: "Carthage/Build/Mac/PathKit.framework"),
+                                     .framework(path: "Carthage/Build/Mac/Result.framework"),
                                      .target(name: "Shell"),
                           ]),
 ])

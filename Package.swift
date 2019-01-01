@@ -10,11 +10,12 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/kylef/PathKit.git", .upToNextMinor(from: "0.9.2")),
+        .package(url: "https://github.com/antitypical/Result.git", .upToNextMinor(from: "4.0.1")),
     ],
     targets: [
         .target(
             name: "Shell",
-            dependencies: ["PathKit"]
+            dependencies: ["PathKit", "Result"]
         ),
         .target(
             name: "ShellTesting",

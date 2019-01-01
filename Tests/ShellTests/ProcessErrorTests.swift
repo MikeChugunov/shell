@@ -4,12 +4,18 @@ import XCTest
 @testable import Shell
 
 final class ShellErrorTests: XCTestCase {
+    func test_description_when_noStderr() {
+        let processError: ProcessRunnerError = .missingExecutable("invalid")
+        let subject = ShellError(processError: processError)
+
+        XCTAssertEqual(subject.description, processError.description)
+    }
+
     func test_description() {
-        XCTAssertEqual(ShellError.missingExecutable(name: "executable").description,
-                       "Couldn't find the executable with name 'executable' in the user PATH")
-        XCTAssertEqual(ShellError.failed(code: 33, stderr: "error").description,
-                       "Command exited with code 33 and error: error")
-        XCTAssertEqual(ShellError.failed(code: 33, stderr: nil).description,
-                       "Command exited with code 33")
+        let processError: ProcessRunnerError = .missingExecutable("invalid")
+        let subject = ShellError(processError: processError,
+                                 stderr: "stderr")
+
+        XCTAssertEqual(subject.description, "stderr")
     }
 }
