@@ -4,9 +4,13 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+### Added
+
+- Tests https://github.com/tuist/shell/pull/5 by @pepibumur.
+
 ### Removed
 
-- **Breaking** Remove throws that are not required https://github.com/tuist/shell/pull/4 by @pepibumur
+- **Breaking** Remove throws that are not required https://github.com/tuist/shell/pull/4 by @pepibumur.
 
 ## 1.0.1
 
