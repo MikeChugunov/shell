@@ -61,15 +61,15 @@ Shell exposes methods for running the commands synchronously, asynchronously, an
 
 ```swift
 // Synchronous running
-let result = shell.sync("xcodebuild", "-project", "Shell", "-scheme", "Shell")
+let result = shell.sync(["xcodebuild", "-project", "Shell", "-scheme", "Shell"])
 
 // Asynchronous running
-shell.async("xcodebuild", "-project", "Shell", "-scheme", "Shell", onCompletion: { result in
+shell.async(["xcodebuild", "-project", "Shell", "-scheme", "Shell"]) { result in
   // Process the result
 })
 
 // Capturing output
-let result = shell.capture("xcode-select", "-p")
+let result = shell.capture(["xcode-select", "-p"])
 ```
 
 ## Testing ✅
@@ -82,7 +82,7 @@ import ShellTesting
 let mock = Shell.mock()
 let xcodebuild = XcodeBuild(shell: mock)
 
-shell.succeed("xcodebuild", "-project", "Shell.xcodeproj", "-scheme", "Shell")
+shell.succeed(["xcodebuild", "-project", "Shell.xcodeproj", "-scheme", "Shell"])
 
 XCTAssertNoThrow(try xcodebuild.build(project: "Shell.xcodeproj", scheme: "Shell"))
 ```

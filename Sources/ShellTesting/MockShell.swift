@@ -14,9 +14,9 @@ public extension Shell {
 public final class MockShell: Shell {
     /// Stubs the given command to succeed.
     ///
-    /// - Parameter argument: Command arguments.
-    public func succeed(_ argument: [String]) {
-        stub(argument,
+    /// - Parameter arguments: Command arguments.
+    public func succeed(_ arguments: [String]) {
+        stub(arguments,
              code: 0)
     }
 
