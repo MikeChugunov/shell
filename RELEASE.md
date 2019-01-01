@@ -18,4 +18,4 @@ In this documents you'll find all the necessary steps to release a new version o
 ### Notes
 
 - If any of the steps above is not clear above do not hesitate to propose improvements.
-- Release should be done only by authorized people that have rights to crease releases in this repository and commiting changes to the Tap repository.
+- Release should be done only by authorized people that have rights to crease releases in this repository.
