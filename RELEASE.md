@@ -12,8 +12,8 @@ In this documents you'll find all the necessary steps to release a new version o
 6. Generate the documentation by running [this script](https://github.com/tuist/jazzy-theme).
 7. Commit, tag and push the changes to GitHub.
 8. Create a new release on [GitHub](https://github.com/tuist/shell) including the information from the last entry in the `CHANGELOG.md`.
-9. Push the `Shell` pod to CocoaPods: `pod trunk push`.
-10. Push the `ShellTesting` pod to CocoaPods: `pod trunk push`.
+9. Run `make carthage-archive` and attach the `Shell.framework.zip` and `ShellTesting.framework.zip` artifacts to the GitHub release.
+10. Push the pods with `make pod-push`.
 
 ### Notes
 
