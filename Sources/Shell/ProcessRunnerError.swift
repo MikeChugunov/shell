@@ -1,6 +1,6 @@
 import Foundation
 
-public enum ProcessRunnerError: Error, CustomStringConvertible {
+public enum ProcessRunnerError: Error, CustomStringConvertible, Equatable {
     /// Thrown when the shell task failed.
     case shell(reason: Process.TerminationReason, code: Int32)
 
