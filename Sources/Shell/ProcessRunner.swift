@@ -1,5 +1,6 @@
 import Foundation
 import PathKit
+import Result
 
 public protocol ProcessRunning {
     /// Runs the process synchronously and returns the result.
@@ -12,13 +13,12 @@ public protocol ProcessRunning {
     ///   - onStdout: Called when new data if forwarded through the standard output.
     ///   - onStderr: Called when new data is forwarded through the standard error.
     /// - Returns: Task execution result.
-    /// - Throws: A TaskError if the launch argument can't be found in the environment.
     func runSync(arguments: [String],
                  shouldBeTerminatedOnParentExit: Bool,
                  workingDirectoryPath: Path?,
                  env: [String: String]?,
                  onStdout: @escaping (Data) -> Void,
-                 onStderr: @escaping (Data) -> Void) throws -> ProcessRunnerResult
+                 onStderr: @escaping (Data) -> Void) -> Result<Void, ProcessRunnerError>
 
     /// Runs the process asynchronously.
     ///
@@ -31,33 +31,13 @@ public protocol ProcessRunning {
     ///   - onStderr: Called when new data is forwarded through the standard error.
     ///   - onCompletion: Called when the task completes.
     /// - Returns: Task execution result.
-    /// - Throws: A TaskError if the launch argument can't be found in the environment.
     func runAsync(arguments: [String],
                   shouldBeTerminatedOnParentExit: Bool,
                   workingDirectoryPath: Path?,
                   env: [String: String]?,
                   onStdout: @escaping (Data) -> Void,
                   onStderr: @escaping (Data) -> Void,
-                  onCompletion: @escaping (ProcessRunnerResult) -> Void) throws
-}
-
-/// Process runner result.
-public struct ProcessRunnerResult {
-    /// Terminatino reason.
-    let reason: Process.TerminationReason
-
-    /// Exit code.
-    let code: Int32
-    
-    /// Initializes the result with its attributes.
-    ///
-    /// - Parameters:
-    ///   - reason: Termination reason.
-    ///   - code: Termination code.
-    public init(reason: Process.TerminationReason, code: Int32) {
-        self.reason = reason
-        self.code = code
-    }
+                  onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void)
 }
 
 public final class ProcessRunner: ProcessRunning {
@@ -81,28 +61,30 @@ public final class ProcessRunner: ProcessRunning {
     ///   - onStdout: Called when new data if forwarded through the standard output.
     ///   - onStderr: Called when new data is forwarded through the standard error.
     /// - Returns: Task execution result.
-    /// - Throws: A TaskError if the launch argument can't be found in the environment.
     public func runSync(arguments: [String],
-                 shouldBeTerminatedOnParentExit: Bool,
-                 workingDirectoryPath: Path?,
-                 env: [String: String]? = nil,
-                 onStdout: @escaping (Data) -> Void,
-                 onStderr: @escaping (Data) -> Void) throws -> ProcessRunnerResult {
+                        shouldBeTerminatedOnParentExit: Bool,
+                        workingDirectoryPath: Path?,
+                        env: [String: String]? = nil,
+                        onStdout: @escaping (Data) -> Void,
+                        onStderr: @escaping (Data) -> Void) -> Result<Void, ProcessRunnerError> {
         let queue = DispatchQueue(label: "io.tuist.process")
-        let process = try self.process(arguments: arguments,
-                                       shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
-                                       workingDirectoryPath: workingDirectoryPath,
-                                       env: env,
-                                       queue: queue,
-                                       onStdout: onStdout,
-                                       onStderr: onStderr)
+        let processResult = self.process(arguments: arguments,
+                                         shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
+                                         workingDirectoryPath: workingDirectoryPath,
+                                         env: env,
+                                         queue: queue,
+                                         onStdout: onStdout,
+                                         onStderr: onStderr)
+        if processResult.error != nil {
+            return processResult.map({ _ in () })
+        }
 
+        let process = processResult.value!
         process.launch()
         process.waitUntilExit()
 
         return queue.sync {
-            ProcessRunnerResult(reason: process.terminationReason,
-                                code: process.terminationStatus)
+            .failure(.shell(reason: process.terminationReason, code: process.terminationStatus))
         }
     }
 
@@ -116,28 +98,30 @@ public final class ProcessRunner: ProcessRunning {
     ///   - onStdout: Called when new data if forwarded through the standard output.
     ///   - onStderr: Called when new data is forwarded through the standard error.
     ///   - onCompletion: Called when the task completes.
-    /// - Returns: Task execution result.
-    /// - Throws: A TaskError if the launch argument can't be found in the environment.
     public func runAsync(arguments: [String],
-                  shouldBeTerminatedOnParentExit: Bool,
-                  workingDirectoryPath: Path?,
-                  env: [String: String]?,
-                  onStdout: @escaping (Data) -> Void,
-                  onStderr: @escaping (Data) -> Void,
-                  onCompletion: @escaping (ProcessRunnerResult) -> Void) throws {
+                         shouldBeTerminatedOnParentExit: Bool,
+                         workingDirectoryPath: Path?,
+                         env: [String: String]?,
+                         onStdout: @escaping (Data) -> Void,
+                         onStderr: @escaping (Data) -> Void,
+                         onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void) {
         let queue = DispatchQueue(label: "io.tuist.process")
-        let process = try self.process(arguments: arguments,
-                                       shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
-                                       workingDirectoryPath: workingDirectoryPath,
-                                       env: env,
-                                       queue: queue,
-                                       onStdout: onStdout,
-                                       onStderr: onStderr)
+        let processResult = self.process(arguments: arguments,
+                                         shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
+                                         workingDirectoryPath: workingDirectoryPath,
+                                         env: env,
+                                         queue: queue,
+                                         onStdout: onStdout,
+                                         onStderr: onStderr)
+        if processResult.error != nil {
+            onCompletion(processResult.map({ _ in () }))
+            return
+        }
 
+        let process = processResult.value!
         process.launch()
         process.terminationHandler = { process in
-            onCompletion(ProcessRunnerResult(reason: process.terminationReason,
-                                             code: process.terminationStatus))
+            onCompletion(.failure(.shell(reason: process.terminationReason, code: process.terminationStatus)))
         }
     }
 
@@ -153,19 +137,18 @@ public final class ProcessRunner: ProcessRunning {
     ///   - queue: Queue to serialize output events.
     ///   - onStdout: Called when new data if forwarded through the standard output.
     ///   - onStderr: Called when new data is forwarded through the standard error.
-    /// - Returns: Process instance.
-    /// - Throws: A TaskError if the launch argument can't be found in the environment.
+    /// - Returns: A result with either the process instance or a process runner error.
     private func process(arguments: [String],
                          shouldBeTerminatedOnParentExit: Bool,
                          workingDirectoryPath: Path?,
                          env: [String: String]?,
                          queue: DispatchQueue,
                          onStdout: @escaping (Data) -> Void,
-                         onStderr: @escaping (Data) -> Void) throws -> Process {
+                         onStderr: @escaping (Data) -> Void) -> Result<Process, ProcessRunnerError> {
         precondition(arguments.count > 0 && !arguments[0].isEmpty, "At least one argument is required")
 
         guard let launchpath = self.lookupExecutable(arguments[0]) else {
-            throw ShellError.missingExecutable(name: arguments[0])
+            return .failure(ProcessRunnerError.missingExecutable(arguments[0]))
         }
 
         let process = Process()
@@ -203,7 +186,7 @@ public final class ProcessRunner: ProcessRunning {
             queue.async { onStderr(handler.availableData) }
         }
 
-        return process
+        return .success(process)
     }
 
     /// It looks up an executable in the user environment.
