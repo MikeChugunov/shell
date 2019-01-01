@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ShellError: Error, CustomStringConvertible {
+public struct ShellError: Error, CustomStringConvertible, Equatable {
     /// Process runner error
     public let processError: ProcessRunnerError
 
@@ -24,5 +24,16 @@ public struct ShellError: Error, CustomStringConvertible {
         } else {
             return processError.description
         }
+    }
+
+    /// Compares two instances of ShellError and returns true if both are equal.
+    ///
+    /// - Parameters:
+    ///   - lhs: First instance to be compared.
+    ///   - rhs: Second instance to be compared.
+    /// - Returns: True if both instances are equal.
+    public static func == (lhs: ShellError, rhs: ShellError) -> Bool {
+        return lhs.processError == rhs.processError &&
+            lhs.stderr == rhs.stderr
     }
 }

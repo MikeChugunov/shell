@@ -187,11 +187,21 @@ public final class ProcessRunner: ProcessRunning {
         process.standardError = errorPipe
 
         outputPipe.fileHandleForReading.readabilityHandler = { handler in
-            queue.async { onStdout(handler.availableData) }
+            queue.async {
+                let data = handler.availableData
+                if data.count > 0 {
+                    onStdout(data)
+                }
+            }
         }
 
         errorPipe.fileHandleForReading.readabilityHandler = { handler in
-            queue.async { onStderr(handler.availableData) }
+            queue.async {
+                let data = handler.availableData
+                if data.count > 0 {
+                    onStderr(data)
+                }
+            }
         }
 
         return .success(process)

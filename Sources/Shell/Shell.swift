@@ -60,10 +60,14 @@ open class Shell {
                      onStdout: ((String) -> Void)?,
                      onStderr: ((String) -> Void)?) -> Result<Void, ShellError> {
         let onStdoutData: (Data) -> Void = { data in
-            if let onStdout = onStdout, let string = String(data: data, encoding: .utf8) { onStdout(string) }
+            if let onStdout = onStdout, let string = String(data: data, encoding: .utf8) {
+                onStdout(string)
+            }
         }
         let onStderrData: (Data) -> Void = { data in
-            if let onStderr = onStderr, let string = String(data: data, encoding: .utf8) { onStderr(string) }
+            if let onStderr = onStderr, let string = String(data: data, encoding: .utf8) {
+                onStderr(string)
+            }
         }
         let result = self.runner.runSync(arguments: arguments,
                                          shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
