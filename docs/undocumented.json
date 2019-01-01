@@ -15,30 +15,30 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ProcessError.swift",
-      "line": 3,
-      "symbol": "ShellError",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ProcessRunner.swift",
-      "line": 4,
+      "line": 5,
       "symbol": "ProcessRunning",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
       "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ProcessRunner.swift",
-      "line": 53,
+      "line": 43,
       "symbol": "ProcessRunner",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ShellResult.swift",
+      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ProcessRunnerError.swift",
       "line": 3,
-      "symbol": "ShellResult",
+      "symbol": "ProcessRunnerError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pedropinera/src/github.com/tuist/shell/Sources/Shell/ShellError.swift",
+      "line": 3,
+      "symbol": "ShellError",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     }

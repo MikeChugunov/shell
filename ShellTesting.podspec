@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ShellTesting"
-  s.version          = "0.3.2"
+  s.version          = "1.0.0"
   s.summary          = "Shell is a µ-library written Swift to run system commands"
   s.homepage         = "https://github.com/tuist/shell"
   s.social_media_url = 'https://twitter.com/pepibumur'
@@ -13,5 +13,6 @@ Pod::Spec.new do |s|
 
   s.source_files = "Sources/ShellTesting/**/*.{swift}"
 
-  s.dependency "Shell", "0.3.2"
+  s.dependency "Shell", "1.0.0"
+  s.dependency "Result", "4.0.1"
 end

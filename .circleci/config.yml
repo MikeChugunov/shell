@@ -27,6 +27,9 @@ jobs:
           name: Run Danger
           command: bundle exec danger
       - run:
+          name: Pod lib lint
+          command: bundle exec pod lib lint --verbose --no-clean
+      - run:
           name: Install Tools
           command: |
             brew install swiftlint
