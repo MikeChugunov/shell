@@ -49,6 +49,14 @@ Add the following line to your project Cartfile:
 github "tuist/shell" "1.0.1"
 ```
 
+### Marathon
+
+If you want to use Shell in a [Marathon](https://github.com/johnsundell/marathon) script, either add it to your `Marathonfile` (see the Marathon repo for instructions on how to do that), or point Marathon to Shell using the inline dependency syntax:
+
+```swift
+import Shell // https://github.com/tuist/shell.git
+```
+
 ## Usage 🚀
 
 To run commands in the system, you need to create an instance of `Shell`:
