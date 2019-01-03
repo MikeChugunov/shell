@@ -10,7 +10,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/kylef/PathKit.git", .upToNextMinor(from: "0.9.2")),
-        .package(url: "https://github.com/antitypical/Result.git", .upToNextMinor(from: "4.0.1")),
+        .package(url: "https://github.com/antitypical/Result.git", .upToNextMinor(from: "4.1.0")),
     ],
     targets: [
         .target(
