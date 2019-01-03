@@ -76,10 +76,10 @@ final class ShellTests: XCTestCase {
                       onStdout: nil,
                       onStderr: { stderr.append($0) },
                       onCompletion: {
-                          expectation.fulfill()
-                          result = $0
+                        result = $0
+                        expectation.fulfill()
         })
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 10)
         XCTAssertNotNil(result.error)
         let expected = "xcrun: error: unable to find utility \"invalid\", not a developer tool or in PATH\n"
         XCTAssertEqual(stderr, [expected])

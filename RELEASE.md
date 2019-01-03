@@ -8,7 +8,7 @@ In this documents you'll find all the necessary steps to release a new version o
 2. Update Carthage dependencies if they are outdated with `carthage update --platform macOS`.
 3. Validate the state of the project by running `make release-check`
 4. Update the `CHANGELOG.md` adding a new entry at the top with the next version. Make sure that all the changes in the version that is about to be released are properly formatted. Commit the changes in `CHANGELOG.md`.
-5. Update the version in the `Shell.podspec` and `README.md` files.
+5. Update the version in the `.podspec` and `README.md` files.
 6. Generate the documentation by running [this script](https://github.com/tuist/jazzy-theme).
 7. Commit, tag and push the changes to GitHub.
 8. Create a new release on [GitHub](https://github.com/tuist/shell) including the information from the last entry in the `CHANGELOG.md`.
