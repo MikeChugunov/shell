@@ -30,6 +30,14 @@ open class Shell {
         return environment.lookupExecutable(name: name, in: searchPaths)
     }
 
+    /// Returns true if the given command succeeds.
+    ///
+    /// - Parameter arguments: Command arguments.
+    /// - Returns: True if the command succeeds.
+    public func succeeds(_ arguments: [String]) -> Bool {
+        return self.sync(arguments).error == nil
+    }
+
     /// Runs a given command and returns its result synchronously.
     ///
     /// - Parameter arguments: Command arguments.
