@@ -76,8 +76,8 @@ final class ShellTests: XCTestCase {
                       onStdout: nil,
                       onStderr: { stderr.append($0) },
                       onCompletion: {
-                        result = $0
-                        expectation.fulfill()
+                          result = $0
+                          expectation.fulfill()
         })
         wait(for: [expectation], timeout: 10)
         XCTAssertNotNil(result.error)
@@ -100,5 +100,10 @@ final class ShellTests: XCTestCase {
         let expected = ShellError(processError: .shell(reason: .exit, code: 72),
                                   stderr: errorMessage)
         XCTAssertEqual(got.error, expected)
+    }
+
+    func test_succeeds() {
+        XCTAssertTrue(subject.succeeds(["which", "xcodebuild"]))
+        XCTAssertFalse(subject.succeeds(["which", "invalid"]))
     }
 }
