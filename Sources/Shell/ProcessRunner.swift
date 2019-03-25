@@ -180,11 +180,27 @@ public final class ProcessRunner: ProcessRunning {
             process.environment = env
         }
 
+        // Because FileHandle's readabilityHandler might be called from a
+        // different queue from the calling queue, avoid a data race by
+        // protecting reads and writes to outputData and errorData on
+        // a single dispatch queue.
         let outputPipe = Pipe()
         process.standardOutput = outputPipe
+        outputPipe.fileHandleForReading.readabilityHandler = { handler in
+            queue.async {
+                let data = handler.availableData
+                onStdout(data)
+            }
+        }
 
         let errorPipe = Pipe()
         process.standardError = errorPipe
+        errorPipe.fileHandleForReading.readabilityHandler = { handler in
+            queue.async {
+                let data = handler.availableData
+                onStderr(data)
+            }
+        }
 
         outputPipe.fileHandleForReading.readabilityHandler = { handler in
             queue.async {
