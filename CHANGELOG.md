@@ -4,6 +4,10 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+### Fixed
+
+- Race condition in `ProcessRunner` https://github.com/tuist/shell/pull/8 by @pepibumur.
+
 ### Added
 
 - `Shell.succeeds` method https://github.com/tuist/shell/pull/7 by @pepibumur.
