@@ -4,6 +4,8 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 1.2.0
+
 ### Fixed
 
 - Race condition in `ProcessRunner` https://github.com/tuist/shell/pull/8 by @pepibumur.
