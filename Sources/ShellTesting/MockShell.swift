@@ -6,7 +6,7 @@ public extension Shell {
     /// Returns a mock instance for testing purposes.
     ///
     /// - Returns: Mock instance of shell.
-    public static func mock() -> MockShell {
+    static func mock() -> MockShell {
         return MockShell(runner: MockProcessRunner())
     }
 }
@@ -49,7 +49,7 @@ public final class MockShell: Shell {
                      stdout: [String] = [],
                      stder: [String] = [],
                      code: Int32 = 0) {
-        //swiftlint:disable:next force_cast
+        // swiftlint:disable:next force_cast
         (runner as! MockProcessRunner).stub(arguments: arguments,
                                             shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
                                             workingDirectoryPath: workingDirectoryPath,

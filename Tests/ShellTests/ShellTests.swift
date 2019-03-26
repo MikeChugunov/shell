@@ -36,8 +36,7 @@ final class ShellTests: XCTestCase {
                                shouldBeTerminatedOnParentExit: true,
                                workingDirectoryPath: nil,
                                env: nil,
-                               onStdout: nil,
-                               onStderr: { stderr.append($0) })
+                               onStdout: nil) { stderr.append($0) }
 
         XCTAssertNotNil(got.error)
         let expected = "xcrun: error: unable to find utility \"invalid\", not a developer tool or in PATH\n"

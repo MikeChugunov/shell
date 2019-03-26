@@ -83,7 +83,7 @@ open class Shell {
                                          env: env,
                                          onStdout: onStdoutData,
                                          onStderr: onStderrData)
-        return result.flatMapError({ .failure(ShellError(processError: $0)) })
+        return result.flatMapError { .failure(ShellError(processError: $0)) }
     }
 
     /// Runs a given command and notifies about its completion asynchronously.
@@ -125,7 +125,7 @@ open class Shell {
             if let onStderr = onStderr, let string = String(data: data, encoding: .utf8) { onStderr(string) }
         }
         let onRunnerCompletion: (Result<Void, ProcessRunnerError>) -> Void = { result in
-            onCompletion(result.flatMapError({ .failure(ShellError(processError: $0)) }))
+            onCompletion(result.flatMapError { .failure(ShellError(processError: $0)) })
         }
         self.runner.runAsync(arguments: arguments,
                              shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,

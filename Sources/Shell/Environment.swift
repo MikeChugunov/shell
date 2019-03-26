@@ -32,12 +32,12 @@ class Environment: EnvironmentProtocol {
     ///   - currentWorkingDirectory: Path to the current working directory.
     /// - Returns: List of paths exposed through the PATH environment variable.
     func searchPaths(pathString: String?, currentWorkingDirectory: Path) -> [Path] {
-        return (pathString ?? "").split(separator: ":").map(String.init).compactMap({ pathString in
+        return (pathString ?? "").split(separator: ":").map(String.init).compactMap { pathString in
             if pathString.first == "/" {
                 return Path(pathString)
             }
             return currentWorkingDirectory + pathString
-        })
+        }
     }
 
     /// It looks up an executable in the given paths and current directory.
@@ -77,7 +77,7 @@ class Environment: EnvironmentProtocol {
 
         for path in paths {
             let path = path + name
-            if path.exists && path.isExecutable {
+            if path.exists, path.isExecutable {
                 return path
             }
         }
