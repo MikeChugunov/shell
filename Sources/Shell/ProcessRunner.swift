@@ -76,11 +76,18 @@ public final class ProcessRunner: ProcessRunning {
                                          onStdout: onStdout,
                                          onStderr: onStderr)
         if processResult.error != nil {
-            return processResult.map({ _ in () })
+            return processResult.map { _ in () }
         }
 
         let process = processResult.value!
         process.launch()
+
+        let outputData = (process.standardOutput! as! Pipe).fileHandleForReading.readDataToEndOfFile()
+        if outputData.count > 0 { onStdout(outputData) }
+
+        let errorData = (process.standardError! as! Pipe).fileHandleForReading.readDataToEndOfFile()
+        if errorData.count > 0 { onStderr(errorData) }
+
         process.waitUntilExit()
 
         return queue.sync {
@@ -118,7 +125,7 @@ public final class ProcessRunner: ProcessRunning {
                                          onStdout: onStdout,
                                          onStderr: onStderr)
         if processResult.error != nil {
-            onCompletion(processResult.map({ _ in () }))
+            onCompletion(processResult.map { _ in () })
             return
         }
 
@@ -166,7 +173,7 @@ public final class ProcessRunner: ProcessRunning {
         if shouldBeTerminatedOnParentExit {
             // This is for terminating subprocesses when the parent process exits.
             // See https://github.com/Carthage/ReactiveTask/issues/3 for the details.
-            let selector = Selector(("setStartsNewProcessGroup:"))
+            let selector = Selector("setStartsNewProcessGroup:")
             if process.responds(to: selector) {
                 process.perform(selector, with: false as NSNumber)
             }
@@ -189,7 +196,9 @@ public final class ProcessRunner: ProcessRunning {
         outputPipe.fileHandleForReading.readabilityHandler = { handler in
             queue.async {
                 let data = handler.availableData
-                onStdout(data)
+                if data.count > 0 {
+                    onStdout(data)
+                }
             }
         }
 
@@ -198,26 +207,15 @@ public final class ProcessRunner: ProcessRunning {
         errorPipe.fileHandleForReading.readabilityHandler = { handler in
             queue.async {
                 let data = handler.availableData
-                onStderr(data)
-            }
-        }
-
-        outputPipe.fileHandleForReading.readabilityHandler = { handler in
-            queue.async {
-                let data = handler.availableData
-                if data.count > 0 {
-                    onStdout(data)
-                }
-            }
-        }
-
-        errorPipe.fileHandleForReading.readabilityHandler = { handler in
-            queue.async {
-                let data = handler.availableData
                 if data.count > 0 {
                     onStderr(data)
                 }
             }
+        }
+
+        process.terminationHandler = { _ in
+            (process.standardOutput! as! Pipe).fileHandleForReading.readabilityHandler = nil
+            (process.standardError! as! Pipe).fileHandleForReading.readabilityHandler = nil
         }
 
         return .success(process)

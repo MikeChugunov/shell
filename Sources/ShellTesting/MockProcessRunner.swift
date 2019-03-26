@@ -47,8 +47,8 @@ final class MockProcessRunner: ProcessRunning {
             return .failure(.shell(reason: .exit, code: 1))
         }
 
-        stub.stdout.forEach({ onStdout($0.data(using: .utf8)!) })
-        stub.stderr.forEach({ onStderr($0.data(using: .utf8)!) })
+        stub.stdout.forEach { onStdout($0.data(using: .utf8)!) }
+        stub.stderr.forEach { onStderr($0.data(using: .utf8)!) }
         if stub.code == 0 {
             return .success(())
         } else {
@@ -73,8 +73,8 @@ final class MockProcessRunner: ProcessRunning {
             return
         }
 
-        stub.stdout.forEach({ onStdout($0.data(using: .utf8)!) })
-        stub.stderr.forEach({ onStderr($0.data(using: .utf8)!) })
+        stub.stdout.forEach { onStdout($0.data(using: .utf8)!) }
+        stub.stderr.forEach { onStderr($0.data(using: .utf8)!) }
         if stub.code == 0 {
             return onCompletion(.success(()))
         } else {

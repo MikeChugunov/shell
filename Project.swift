@@ -23,5 +23,5 @@ let project = Project(name: "Shell-Carthage",
                                      .framework(path: "Carthage/Build/Mac/PathKit.framework"),
                                      .framework(path: "Carthage/Build/Mac/Result.framework"),
                                      .target(name: "Shell"),
-                          ]),
-])
+                                 ]),
+                      ])
