@@ -4,6 +4,8 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 1.2.1
+
 ### Fixed
 
 - File handlers not getting deallocated after the task completes https://github.com/tuist/shell/pull/9 by @pepibumur.

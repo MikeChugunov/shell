@@ -81,13 +81,6 @@ public final class ProcessRunner: ProcessRunning {
 
         let process = processResult.value!
         process.launch()
-
-        let outputData = (process.standardOutput! as! Pipe).fileHandleForReading.readDataToEndOfFile()
-        if outputData.count > 0 { onStdout(outputData) }
-
-        let errorData = (process.standardError! as! Pipe).fileHandleForReading.readDataToEndOfFile()
-        if errorData.count > 0 { onStderr(errorData) }
-
         process.waitUntilExit()
 
         return queue.sync {

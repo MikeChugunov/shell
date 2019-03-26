@@ -155,8 +155,8 @@
 		G_8490388482D59DAB86EE8E1A17924A9C /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				FR_F24D83DDCD440BA28F3B1E8C5D157C59 /* PathKit.framework */,
 				FR_59C231A9EB0F7D4E51DB0C9ECA9E6985 /* Result.framework */,
+				FR_F24D83DDCD440BA28F3B1E8C5D157C59 /* PathKit.framework */,
 			);
 			path = Mac;
 			sourceTree = "<group>";
