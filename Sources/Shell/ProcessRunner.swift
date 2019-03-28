@@ -1,6 +1,5 @@
 import Foundation
 import PathKit
-import Result
 
 public protocol ProcessRunning {
     /// Runs the process synchronously and returns the result.
@@ -67,7 +66,10 @@ public final class ProcessRunner: ProcessRunning {
                         env: [String: String]? = nil,
                         onStdout: @escaping (Data) -> Void,
                         onStderr: @escaping (Data) -> Void) -> Result<Void, ProcessRunnerError> {
-        let queue = DispatchQueue(label: "io.tuist.process")
+        let queue = DispatchQueue(label: "io.tuist.shell",
+                                  qos: .default,
+                                  attributes: [],
+                                  autoreleaseFrequency: .inherit)
         let processResult = self.process(arguments: arguments,
                                          shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
                                          workingDirectoryPath: workingDirectoryPath,
@@ -109,7 +111,10 @@ public final class ProcessRunner: ProcessRunning {
                          onStdout: @escaping (Data) -> Void,
                          onStderr: @escaping (Data) -> Void,
                          onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void) {
-        let queue = DispatchQueue(label: "io.tuist.process")
+        let queue = DispatchQueue(label: "io.tuist.shell",
+                                  qos: .default,
+                                  attributes: [],
+                                  autoreleaseFrequency: .inherit)
         let processResult = self.process(arguments: arguments,
                                          shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
                                          workingDirectoryPath: workingDirectoryPath,
@@ -125,10 +130,12 @@ public final class ProcessRunner: ProcessRunning {
         let process = processResult.value!
         process.launch()
         process.terminationHandler = { process in
-            if process.terminationStatus != 0 {
-                onCompletion(.failure(.shell(reason: process.terminationReason, code: process.terminationStatus)))
-            } else {
-                onCompletion(.success(()))
+            queue.async {
+                if process.terminationStatus != 0 {
+                    onCompletion(.failure(.shell(reason: process.terminationReason, code: process.terminationStatus)))
+                } else {
+                    onCompletion(.success(()))
+                }
             }
         }
     }
@@ -207,8 +214,10 @@ public final class ProcessRunner: ProcessRunning {
         }
 
         process.terminationHandler = { _ in
-            (process.standardOutput! as! Pipe).fileHandleForReading.readabilityHandler = nil
-            (process.standardError! as! Pipe).fileHandleForReading.readabilityHandler = nil
+            queue.async {
+                (process.standardOutput! as! Pipe).fileHandleForReading.readabilityHandler = nil
+                (process.standardError! as! Pipe).fileHandleForReading.readabilityHandler = nil
+            }
         }
 
         return .success(process)

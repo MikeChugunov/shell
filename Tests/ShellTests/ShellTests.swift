@@ -1,6 +1,5 @@
 import Foundation
 import PathKit
-import Result
 import XCTest
 
 @testable import Shell

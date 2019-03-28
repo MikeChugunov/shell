@@ -1,7 +1,6 @@
 import Foundation
 import class Foundation.ProcessInfo
 import PathKit
-import Result
 
 /// Class tu run commands in the system.
 open class Shell {
@@ -159,6 +158,7 @@ open class Shell {
 
         let onStdout: (Data) -> Void = { stdout in
             if let string = String(data: stdout, encoding: .utf8) {
+                print(string)
                 output.append(string)
             }
         }
