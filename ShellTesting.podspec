@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/tuist/shell.git", :tag => s.version.to_s }
   s.requires_arc = true
   s.authors = "Tuist"
+  s.swift_version = "5.0"
 
   s.osx.deployment_target = '10.10'
 
