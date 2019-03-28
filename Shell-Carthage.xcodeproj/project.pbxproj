@@ -7,18 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF_2DE4EC1B1D74B63C3CAD0E86C85F4031 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_01B863EE2F74EED2EED6AA99F7AC0355 /* Shell.swift */; settings = {}; };
-		BF_3077A335AB81199EAC3B5C0E0840ED85 /* ProcessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_6A212FC66D72538044BB89A936507907 /* ProcessRunner.swift */; settings = {}; };
+		B9CA6E3D224D2B0100DB8D1D /* Result+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA6E3C224D2B0100DB8D1D /* Result+Extras.swift */; };
+		BF_2DE4EC1B1D74B63C3CAD0E86C85F4031 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_01B863EE2F74EED2EED6AA99F7AC0355 /* Shell.swift */; };
+		BF_3077A335AB81199EAC3B5C0E0840ED85 /* ProcessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_6A212FC66D72538044BB89A936507907 /* ProcessRunner.swift */; };
 		BF_568E3901EDCDCE511B648B56BDBA2D2F /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FR_F24D83DDCD440BA28F3B1E8C5D157C59 /* PathKit.framework */; };
-		BF_5B14C9E34984E34D25C1C245E99B69D7 /* String+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_88511AE8D290992D0E2E4DA1FD68477B /* String+Extras.swift */; settings = {}; };
-		BF_7412DF8BE7BEFD1EE98A1CA4AEEDE8D3 /* ShellError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_1F1F6F3A087B7AF4A844307F161B66BB /* ShellError.swift */; settings = {}; };
-		BF_76AE0F4A44A5F44957BE0E9CA358414E /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FR_59C231A9EB0F7D4E51DB0C9ECA9E6985 /* Result.framework */; };
-		BF_85EA891F1688F82D75B97122B7646F96 /* ProcessRunnerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_960EC25AB76B063578EC70D48EEDBD04 /* ProcessRunnerError.swift */; settings = {}; };
+		BF_5B14C9E34984E34D25C1C245E99B69D7 /* String+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_88511AE8D290992D0E2E4DA1FD68477B /* String+Extras.swift */; };
+		BF_7412DF8BE7BEFD1EE98A1CA4AEEDE8D3 /* ShellError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_1F1F6F3A087B7AF4A844307F161B66BB /* ShellError.swift */; };
+		BF_85EA891F1688F82D75B97122B7646F96 /* ProcessRunnerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_960EC25AB76B063578EC70D48EEDBD04 /* ProcessRunnerError.swift */; };
 		BF_86FA315FF74AE1F52E68ED274F97F918 /* Shell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FR_B1EE2ACD86B6B4E2FFBE54894A96F09C /* Shell.framework */; };
-		BF_8D7E6AF1FAC3FD6F95B8DAA97F6EC1D9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2D66292554BD1B22183276C45B6F7F86 /* Environment.swift */; settings = {}; };
-		BF_9489B9CC4F8DD31187D7D2A72AAC3A04 /* MockProcessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_D6A77D9F13C38F65D106DB7E0717E62D /* MockProcessRunner.swift */; settings = {}; };
-		BF_98FAB77413648731C16E4CAC15CC3BD4 /* MockShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2D3CECC4265BB03EB8ED9434DEA3C417 /* MockShell.swift */; settings = {}; };
-		BF_D9319BF0DBE854A11E743947ED868072 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FR_59C231A9EB0F7D4E51DB0C9ECA9E6985 /* Result.framework */; };
+		BF_8D7E6AF1FAC3FD6F95B8DAA97F6EC1D9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2D66292554BD1B22183276C45B6F7F86 /* Environment.swift */; };
+		BF_9489B9CC4F8DD31187D7D2A72AAC3A04 /* MockProcessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_D6A77D9F13C38F65D106DB7E0717E62D /* MockProcessRunner.swift */; };
+		BF_98FAB77413648731C16E4CAC15CC3BD4 /* MockShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2D3CECC4265BB03EB8ED9434DEA3C417 /* MockShell.swift */; };
 		BF_FC285F49B91B4B275D7E28A4A48DB9BF /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FR_F24D83DDCD440BA28F3B1E8C5D157C59 /* PathKit.framework */; };
 		BF_FF300E8E511760602276F5F4B4D25C1C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_246F4387B2C1A365BE65BA34F82C35BB /* Project.swift */; };
 /* End PBXBuildFile section */
@@ -55,10 +54,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B9CA6E3C224D2B0100DB8D1D /* Result+Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Extras.swift"; sourceTree = "<group>"; };
 		FR_01B863EE2F74EED2EED6AA99F7AC0355 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		FR_10D7075B3FBDD0A6B7689484B61E6057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FR_1F1F6F3A087B7AF4A844307F161B66BB /* ShellError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellError.swift; sourceTree = "<group>"; };
-		FR_246F4387B2C1A365BE65BA34F82C35BB /* Project.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = Project.swift; path = Project.swift; sourceTree = "<group>"; };
+		FR_246F4387B2C1A365BE65BA34F82C35BB /* Project.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		FR_2D3CECC4265BB03EB8ED9434DEA3C417 /* MockShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockShell.swift; sourceTree = "<group>"; };
 		FR_2D66292554BD1B22183276C45B6F7F86 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		FR_59C231A9EB0F7D4E51DB0C9ECA9E6985 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Result.framework; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		FR_960EC25AB76B063578EC70D48EEDBD04 /* ProcessRunnerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessRunnerError.swift; sourceTree = "<group>"; };
 		FR_B1EE2ACD86B6B4E2FFBE54894A96F09C /* Shell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FR_D6A77D9F13C38F65D106DB7E0717E62D /* MockProcessRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProcessRunner.swift; sourceTree = "<group>"; };
-		FR_DED37A8F162D510BD8A76CAA8DD3FA37 /* Shell-CarthageDescription.framework */ = {isa = PBXFileReference; name = "Shell-CarthageDescription.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FR_DED37A8F162D510BD8A76CAA8DD3FA37 /* Shell-CarthageDescription.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Shell-CarthageDescription.framework"; path = Shell_CarthageDescription.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FR_F24D83DDCD440BA28F3B1E8C5D157C59 /* PathKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PathKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,7 +78,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF_FC285F49B91B4B275D7E28A4A48DB9BF /* PathKit.framework in Frameworks */,
-				BF_D9319BF0DBE854A11E743947ED868072 /* Result.framework in Frameworks */,
 				BF_86FA315FF74AE1F52E68ED274F97F918 /* Shell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,7 +87,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF_568E3901EDCDCE511B648B56BDBA2D2F /* PathKit.framework in Frameworks */,
-				BF_76AE0F4A44A5F44957BE0E9CA358414E /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +106,7 @@
 		G_23CFC63609B3EFE917DD215FC3CCB987 /* Shell */ = {
 			isa = PBXGroup;
 			children = (
+				B9CA6E3C224D2B0100DB8D1D /* Result+Extras.swift */,
 				FR_2D66292554BD1B22183276C45B6F7F86 /* Environment.swift */,
 				FR_6A212FC66D72538044BB89A936507907 /* ProcessRunner.swift */,
 				FR_960EC25AB76B063578EC70D48EEDBD04 /* ProcessRunnerError.swift */,
@@ -323,7 +322,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Skipping, nothing to be embedded.\"";
+			shellScript = "echo \"Skipping, nothing to be embedded.\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -347,6 +346,7 @@
 				BF_2DE4EC1B1D74B63C3CAD0E86C85F4031 /* Shell.swift in Sources */,
 				BF_7412DF8BE7BEFD1EE98A1CA4AEEDE8D3 /* ShellError.swift in Sources */,
 				BF_5B14C9E34984E34D25C1C245E99B69D7 /* String+Extras.swift in Sources */,
+				B9CA6E3D224D2B0100DB8D1D /* Result+Extras.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +440,11 @@
 				FRAMEWORK_VERSION = A;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD = /usr/bin/true;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = /Users/pedropinera/.tuist/Versions/0.11.0;
 				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Users/pedropinera/.tuist/Versions/0.11.0";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -472,7 +476,11 @@
 				HEADER_SEARCH_PATHS = " ";
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.ShellTesting;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -500,7 +508,11 @@
 				HEADER_SEARCH_PATHS = " ";
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.Shell;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -527,7 +539,11 @@
 				HEADER_SEARCH_PATHS = " ";
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.ShellTesting;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -555,7 +571,11 @@
 				HEADER_SEARCH_PATHS = " ";
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.Shell;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -581,7 +601,11 @@
 				FRAMEWORK_VERSION = A;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD = /usr/bin/true;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = /Users/pedropinera/.tuist/Versions/0.11.0;
 				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Users/pedropinera/.tuist/Versions/0.11.0";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -657,6 +681,7 @@
 				BC_BB8FDC4697F84F946A25973CAE4266D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CL_449D20D0C486B384387BA57F9D00EBB0 /* Build configuration list for PBXNativeTarget "Shell-CarthageDescription" */ = {
 			isa = XCConfigurationList;
@@ -665,6 +690,7 @@
 				BC_D78B2418C8587F3C09A9B87010235980 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CL_A398E5B9186A6145A124A6B721892861 /* Build configuration list for PBXNativeTarget "ShellTesting" */ = {
 			isa = XCConfigurationList;
@@ -673,6 +699,7 @@
 				BC_192858FA98A85E270ECBF12DD81B7D4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CL_C0A04DCAD3B890DE2ACF3621C4030BE9 /* Build configuration list for PBXProject "Shell-Carthage" */ = {
 			isa = XCConfigurationList;
@@ -681,6 +708,7 @@
 				BC_F584D816C822DEA022CED22682E95FD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

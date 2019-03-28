@@ -4,6 +4,8 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 2.0.0
+
 ### Added
 
 - **Breaking:** Swift 5 support https://github.com/tuist/shell/pull/10 by @pepibumur.
