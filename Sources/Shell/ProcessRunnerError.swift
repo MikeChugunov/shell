@@ -18,6 +18,8 @@ public enum ProcessRunnerError: Error, CustomStringConvertible, Equatable {
                 return "The process errored with code \(code)"
             case .uncaughtSignal:
                 return "The process was interrupted with code \(code)"
+            @unknown default:
+                fatalError()
             }
         }
     }

@@ -8,11 +8,11 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/tuist/shell.git", :tag => s.version.to_s }
   s.requires_arc = true
   s.authors = "Tuist"
+  s.swift_version = "5.0"
 
   s.osx.deployment_target = '10.10'
 
   s.source_files = "Sources/ShellTesting/**/*.{swift}"
 
   s.dependency "Shell", "1.2.1"
-  s.dependency "Result", "4.1.0"
 end

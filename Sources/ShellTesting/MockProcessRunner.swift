@@ -1,6 +1,5 @@
 import Foundation
 import PathKit
-import Result
 import Shell
 
 final class MockProcessRunner: ProcessRunning {

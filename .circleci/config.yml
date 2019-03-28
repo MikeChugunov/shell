@@ -8,7 +8,7 @@ workflows:
 jobs:
   build:
     macos:
-      xcode: '10.1.0'
+      xcode: '10.2.0'
     steps:
       - checkout
       - restore_cache:
@@ -26,9 +26,6 @@ jobs:
       - run:
           name: Run Danger
           command: bundle exec danger
-      - run:
-          name: Pod lib lint
-          command: bundle exec pod lib lint --verbose --no-clean
       - run:
           name: Install Tools
           command: |
