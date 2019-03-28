@@ -173,7 +173,7 @@ public final class ProcessRunner: ProcessRunning {
         if shouldBeTerminatedOnParentExit {
             // This is for terminating subprocesses when the parent process exits.
             // See https://github.com/Carthage/ReactiveTask/issues/3 for the details.
-            let selector = Selector("setStartsNewProcessGroup:")
+            let selector = Selector(("setStartsNewProcessGroup:"))
             if process.responds(to: selector) {
                 process.perform(selector, with: false as NSNumber)
             }
