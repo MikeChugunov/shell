@@ -1,1 +1,1 @@
-github "tuist/PathKit" "732bff7354542ac64f6515d8ea4895898084b9e1"
+github "kylef/PathKit" ~> 1.0.0
