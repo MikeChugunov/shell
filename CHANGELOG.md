@@ -4,6 +4,10 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+### Changed
+
+- Bump PathKit version to 1.0.0 https://github.com/tuist/shell/pull/11 by @pepibumur.
+
 ## 2.0.0
 
 ### Added
