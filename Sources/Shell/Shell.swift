@@ -158,7 +158,6 @@ open class Shell {
 
         let onStdout: (Data) -> Void = { stdout in
             if let string = String(data: stdout, encoding: .utf8) {
-                print(string)
                 output.append(string)
             }
         }
