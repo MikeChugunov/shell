@@ -4,6 +4,12 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 2.0.3
+
+### Fixed
+
+- Carthage dependency to PathKit by @pepibumur.
+
 ## 2.0.2
 
 ### Fixed
