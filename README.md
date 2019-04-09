@@ -24,7 +24,7 @@ let package = Package(
     targets: [
         .target(
             name: "myproject",
-            dependencies: ["shell"]),
+            dependencies: ["Shell"]),
         ]
 )
 ```
