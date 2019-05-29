@@ -15,4 +15,5 @@ Pod::Spec.new do |s|
   s.source_files = "Sources/Shell/**/*.{swift}"
 
   s.dependency "PathKit", "1.0.0"
+  s.dependency "RxSwift", "5.0.0"
 end
