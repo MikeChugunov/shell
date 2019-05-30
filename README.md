@@ -96,7 +96,7 @@ XCTAssertNoThrow(try xcodebuild.build(project: "Shell.xcodeproj", scheme: "Shell
 Shell comes with a package, `RxShell` that adds a reactive extension using RxSwift to the interface of `Shell`.
 
 ```swift
-subject.run(["xcodebuild", "-project", "MyProject.xcodeproj"]).subscribe {
+subject.run(["xcodebuild", "-project", "Shell", "-scheme", "Shell"]).subscribe {
   print("Compilation completed")
 }
 ```
