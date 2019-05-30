@@ -4,6 +4,12 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 2.2.2
+
+### Changed
+
+- Make `stdout` and `stderr` public.
+
 ## 2.1.1
 
 ### Changed
