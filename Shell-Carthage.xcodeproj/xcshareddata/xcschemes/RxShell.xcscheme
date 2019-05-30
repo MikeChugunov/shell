@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FACB7C65154707EEDF230E4334E8EA83"
-               BuildableName = "Shell.framework"
-               BlueprintName = "Shell"
+               BlueprintIdentifier = "AB4ED1ECD2E80A62CCAD54E7AA71EE82"
+               BuildableName = "RxShell.framework"
+               BlueprintName = "RxShell"
                ReferencedContainer = "container:Shell-Carthage.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FACB7C65154707EEDF230E4334E8EA83"
-            BuildableName = "Shell.framework"
-            BlueprintName = "Shell"
+            BlueprintIdentifier = "AB4ED1ECD2E80A62CCAD54E7AA71EE82"
+            BuildableName = "RxShell.framework"
+            BlueprintName = "RxShell"
             ReferencedContainer = "container:Shell-Carthage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FACB7C65154707EEDF230E4334E8EA83"
-            BuildableName = "Shell.framework"
-            BlueprintName = "Shell"
+            BlueprintIdentifier = "AB4ED1ECD2E80A62CCAD54E7AA71EE82"
+            BuildableName = "RxShell.framework"
+            BlueprintName = "RxShell"
             ReferencedContainer = "container:Shell-Carthage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

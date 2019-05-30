@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "NT_580956F8C4F769ED44B4DFD3F1B6EAE4"
+               BlueprintIdentifier = "15C87C2CD5F47A7C863CE602B139A38C"
                BuildableName = "ShellTesting.framework"
                BlueprintName = "ShellTesting"
                ReferencedContainer = "container:Shell-Carthage.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "NT_580956F8C4F769ED44B4DFD3F1B6EAE4"
+            BlueprintIdentifier = "15C87C2CD5F47A7C863CE602B139A38C"
             BuildableName = "ShellTesting.framework"
             BlueprintName = "ShellTesting"
             ReferencedContainer = "container:Shell-Carthage.xcodeproj">
@@ -65,7 +65,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "NT_580956F8C4F769ED44B4DFD3F1B6EAE4"
+            BlueprintIdentifier = "15C87C2CD5F47A7C863CE602B139A38C"
             BuildableName = "ShellTesting.framework"
             BlueprintName = "ShellTesting"
             ReferencedContainer = "container:Shell-Carthage.xcodeproj">

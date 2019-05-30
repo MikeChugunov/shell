@@ -14,6 +14,9 @@ final class ShellRxTests: XCTestCase {
     }
 
     func test_run() throws {
+        subject.run(["xcodebuild", "-project", "MyProject.xcodeproj"]).subscribe {
+            print("Compilation completed")
+        }
         let got = try subject.run(["which", "open"],
                                   shouldBeTerminatedOnParentExit: false,
                                   workingDirectoryPath: nil,

@@ -6,7 +6,9 @@ release-check:
 pod-push:
 	bundle exec pod trunk push --allow-warnings --verbose Shell.podspec
 	bundle exec pod trunk push --allow-warnings --verbose ShellTesting.podspec
+	bundle exec pod trunk push --allow-warnings --verbose RxShell.podspec
 carthage-archive:
 	carthage build --no-skip-current --platform macOS
 	carthage archive Shell
 	carthage archive ShellTesting
+	carthage archive RxShell
