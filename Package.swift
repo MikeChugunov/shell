@@ -7,6 +7,7 @@ let package = Package(
     products: [
         .library(name: "Shell", targets: ["Shell"]),
         .library(name: "ShellTesting", targets: ["ShellTesting"]),
+        .library(name: "RxShell", targets: ["RxShell"]),
     ],
     dependencies: [
         .package(url: "https://github.com/tuist/PathKit.git", .upToNextMinor(from: "1.0.0")),
