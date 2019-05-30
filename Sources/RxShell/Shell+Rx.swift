@@ -43,7 +43,7 @@ extension Observable where Element == ShellEvent {
     /// Concatenates the standard output and error into a single ShellOutput instance.
     ///
     /// - Returns: ShellOutput instance with all the standard output and error.
-    func collect() -> Observable<ShellOutput> {
+    public func collect() -> Observable<ShellOutput> {
         return reduce(ShellOutput()) { (output, event) -> ShellOutput in
             switch event {
             case let .stderr(stderr):
