@@ -15,10 +15,10 @@ public enum ShellEvent {
 /// Type that serves to concatenate the standard output and error from a task.
 public class ShellOutput {
     /// The accumulated standard output.
-    public private(set) var stdout: String
+    public internal(set) var stdout: String
 
     /// The accumulated standard error.
-    public private(set) var stderr: String
+    public internal(set) var stderr: String
 
     /// Initializes the shell output with its attributes.
     ///
