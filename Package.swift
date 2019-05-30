@@ -29,5 +29,9 @@ let package = Package(
             name: "ShellTests",
             dependencies: ["Shell"]
         ),
+        .testTarget(
+            name: "RxShellTests",
+            dependencies: ["RxShell", "RxBlocking"]
+        ),
     ]
 )

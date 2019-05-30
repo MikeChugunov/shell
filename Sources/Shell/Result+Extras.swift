@@ -3,16 +3,16 @@ import Foundation
 extension Result {
     var error: Failure? {
         switch self {
-        case .failure(let failure):
+        case let .failure(failure):
             return failure
         default:
             return nil
         }
     }
-    
+
     var value: Success? {
         switch self {
-        case .success(let success):
+        case let .success(success):
             return success
         default:
             return nil

@@ -29,14 +29,15 @@ public protocol ProcessRunning {
     ///   - onStdout: Called when new data if forwarded through the standard output.
     ///   - onStderr: Called when new data is forwarded through the standard error.
     ///   - onCompletion: Called when the task completes.
-    /// - Returns: Task execution result.
+    /// - Returns: The process.
+    @discardableResult
     func runAsync(arguments: [String],
                   shouldBeTerminatedOnParentExit: Bool,
                   workingDirectoryPath: Path?,
                   env: [String: String]?,
                   onStdout: @escaping (Data) -> Void,
                   onStderr: @escaping (Data) -> Void,
-                  onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void)
+                  onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void) -> Process?
 }
 
 public final class ProcessRunner: ProcessRunning {
@@ -104,13 +105,15 @@ public final class ProcessRunner: ProcessRunning {
     ///   - onStdout: Called when new data if forwarded through the standard output.
     ///   - onStderr: Called when new data is forwarded through the standard error.
     ///   - onCompletion: Called when the task completes.
+    /// - Returns: The process.
+    @discardableResult
     public func runAsync(arguments: [String],
                          shouldBeTerminatedOnParentExit: Bool,
                          workingDirectoryPath: Path?,
                          env: [String: String]?,
                          onStdout: @escaping (Data) -> Void,
                          onStderr: @escaping (Data) -> Void,
-                         onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void) {
+                         onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void) -> Process? {
         let queue = DispatchQueue(label: "io.tuist.shell",
                                   qos: .default,
                                   attributes: [],
@@ -124,7 +127,7 @@ public final class ProcessRunner: ProcessRunning {
                                          onStderr: onStderr)
         if processResult.error != nil {
             onCompletion(processResult.map { _ in () })
-            return
+            return nil
         }
 
         let process = processResult.value!
@@ -138,6 +141,7 @@ public final class ProcessRunner: ProcessRunning {
                 }
             }
         }
+        return process
     }
 
     // MARK: - Private
