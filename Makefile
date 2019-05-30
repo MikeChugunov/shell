@@ -3,6 +3,7 @@ release-check:
 	swift test
 	xcodebuild clean build -scheme Shell -project Shell-Carthage.xcodeproj
 	xcodebuild clean build -scheme ShellTesting -project Shell-Carthage.xcodeproj
+	xcodebuild clean build -scheme RxShell -project Shell-Carthage.xcodeproj
 pod-push:
 	bundle exec pod trunk push --allow-warnings --verbose Shell.podspec
 	bundle exec pod trunk push --allow-warnings --verbose ShellTesting.podspec
