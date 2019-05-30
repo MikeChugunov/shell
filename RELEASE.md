@@ -11,7 +11,7 @@ In this documents you'll find all the necessary steps to release a new version o
 5. Update the version in the `.podspec` and `README.md` files.
 6. Commit, tag and push the changes to GitHub.
 7. Create a new release on [GitHub](https://github.com/tuist/shell) including the information from the last entry in the `CHANGELOG.md`.
-8. Run `make carthage-archive` and attach the `Shell.framework.zip` and `ShellTesting.framework.zip` artifacts to the GitHub release.
+8. Run `make carthage-archive` and attach the `Shell.framework.zip`, `ShellTesting.framework.zip`, and `RxShell.framework.zip` artifacts to the GitHub release.
 9. Push the pods with `make pod-push`.
 
 ### Notes

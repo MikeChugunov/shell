@@ -61,7 +61,7 @@ final class MockProcessRunner: ProcessRunning {
                   env _: [String: String]?,
                   onStdout: @escaping (Data) -> Void,
                   onStderr: @escaping (Data) -> Void,
-                  onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void) {
+                  onCompletion: @escaping (Result<Void, ProcessRunnerError>) -> Void) -> Process? {
         let command = arguments.joined(separator: " ")
         guard let stub = stubs[StubbedCommand(arguments: arguments,
                                               shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
@@ -69,15 +69,16 @@ final class MockProcessRunner: ProcessRunning {
                                               env: nil)] else {
             onStderr("command '\(command)' not stubbed".data(using: .utf8)!)
             onCompletion(.failure(.shell(reason: .exit, code: 1)))
-            return
+            return nil
         }
 
         stub.stdout.forEach { onStdout($0.data(using: .utf8)!) }
         stub.stderr.forEach { onStderr($0.data(using: .utf8)!) }
         if stub.code == 0 {
-            return onCompletion(.success(()))
+            onCompletion(.success(()))
         } else {
-            return onCompletion(.failure(.shell(reason: .exit, code: stub.code)))
+            onCompletion(.failure(.shell(reason: .exit, code: stub.code)))
         }
+        return nil
     }
 }

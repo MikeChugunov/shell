@@ -1,1 +1,2 @@
+github "ReactiveX/RxSwift" "5.0.1"
 github "tuist/PathKit" "1.0.0"

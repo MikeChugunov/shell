@@ -110,13 +110,15 @@ open class Shell {
     ///   - onStdout: Closure to send the standard output through.
     ///   - onStderr: Closure to send the standard error through.
     ///   - onCompletion: Closure to notify the completion of the task.
+    /// - Returns: The process that runs the task.
+    @discardableResult
     public func async(_ arguments: [String],
                       shouldBeTerminatedOnParentExit: Bool,
                       workingDirectoryPath: Path?,
                       env: [String: String]?,
                       onStdout: ((String) -> Void)?,
                       onStderr: ((String) -> Void)?,
-                      onCompletion: @escaping (Result<Void, ShellError>) -> Void) {
+                      onCompletion: @escaping (Result<Void, ShellError>) -> Void) -> Process? {
         let onStdoutData: (Data) -> Void = { data in
             if let onStdout = onStdout, let string = String(data: data, encoding: .utf8) { onStdout(string) }
         }
@@ -126,13 +128,13 @@ open class Shell {
         let onRunnerCompletion: (Result<Void, ProcessRunnerError>) -> Void = { result in
             onCompletion(result.flatMapError { .failure(ShellError(processError: $0)) })
         }
-        self.runner.runAsync(arguments: arguments,
-                             shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
-                             workingDirectoryPath: workingDirectoryPath,
-                             env: env,
-                             onStdout: onStdoutData,
-                             onStderr: onStderrData,
-                             onCompletion: onRunnerCompletion)
+        return self.runner.runAsync(arguments: arguments,
+                                    shouldBeTerminatedOnParentExit: shouldBeTerminatedOnParentExit,
+                                    workingDirectoryPath: workingDirectoryPath,
+                                    env: env,
+                                    onStdout: onStdoutData,
+                                    onStderr: onStderrData,
+                                    onCompletion: onRunnerCompletion)
     }
 
     /// Runs the given command and returns the captured output.

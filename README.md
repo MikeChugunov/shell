@@ -91,6 +91,16 @@ shell.succeed(["xcodebuild", "-project", "Shell.xcodeproj", "-scheme", "Shell"])
 XCTAssertNoThrow(try xcodebuild.build(project: "Shell.xcodeproj", scheme: "Shell"))
 ```
 
+## RxShell 💃
+
+Shell comes with a package, `RxShell` that adds a reactive extension using RxSwift to the interface of `Shell`.
+
+```swift
+subject.run(["xcodebuild", "-project", "Shell", "-scheme", "Shell"]).subscribe {
+  print("Compilation completed")
+}
+```
+
 ## Setup for development 👩‍💻
 
 1.  Git clone: `git@github.com:tuist/shell.git`

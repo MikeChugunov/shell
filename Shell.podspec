@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version          = "2.0.3"
   s.summary          = "Shell is a µ-library written Swift to run system commands"
   s.homepage         = "https://github.com/tuist/shell"
-  s.social_media_url = 'https://twitter.com/pepibumur'
+  s.social_media_url = 'https://twitter.com/tuist'
   s.license          = 'MIT'
   s.source           = { :git => "https://github.com/tuist/shell.git", :tag => s.version.to_s }
   s.requires_arc = true
