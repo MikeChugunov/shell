@@ -132,7 +132,10 @@ public final class ProcessRunner: ProcessRunning {
 
         let process = processResult.value!
         process.launch()
+        let terminationHandler = process.terminationHandler
+        
         process.terminationHandler = { process in
+            terminationHandler?(process)
             queue.async {
                 if process.terminationStatus != 0 {
                     onCompletion(.failure(.shell(reason: process.terminationReason, code: process.terminationStatus)))
