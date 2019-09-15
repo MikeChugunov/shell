@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RxShell"
-  s.version          = "2.1.2"
+  s.version          = "2.1.3"
   s.summary          = "A extension for Shell that adds a reactive interface with RxSwift"
   s.homepage         = "https://github.com/tuist/shell"
   s.social_media_url = 'https://twitter.com/tuist'
@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
 
   s.source_files = "Sources/RxShell/**/*.{swift}"
 
-  s.dependency "Shell", "2.1.2"
+  s.dependency "Shell", "2.1.3"
   s.dependency "RxSwift", "5.0.0"
 end

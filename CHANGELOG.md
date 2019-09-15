@@ -4,6 +4,12 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 2.1.3
+
+### Fixed
+
+- A bug that caused the process runner to consume a lot of memory because the output pipes were not getting closed. By @pepibumur.
+
 ## 2.1.2
 
 ### Changed
