@@ -19,7 +19,7 @@ Add the dependency in your `Package.swift` file:
 let package = Package(
     name: "myproject",
     dependencies: [
-        .package(url: "https://github.com/tuist/shell.git", .upToNextMajor(from: "2.1.3")),
+        .package(url: "https://github.com/tuist/shell.git", .upToNextMajor(from: "2.2.0")),
         ],
     targets: [
         .target(
@@ -34,9 +34,9 @@ let package = Package(
 Add the following line to your project Podfile:
 
 ```ruby
-pod "Shell", "2.1.3"
-pod "ShellTesting", "2.1.3"
-pod "RxShell", "2.1.3"
+pod "Shell", "2.2.0"
+pod "ShellTesting", "2.2.0"
+pod "RxShell", "2.2.0"
 ```
 
 ### Carthage
@@ -44,7 +44,7 @@ pod "RxShell", "2.1.3"
 Add the following line to your project Cartfile:
 
 ```ruby
-github "tuist/shell" "2.1.3"
+github "tuist/shell" "2.2.0"
 ```
 
 ### Marathon

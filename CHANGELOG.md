@@ -4,6 +4,16 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 2.2.0
+
+### Changed
+
+- Update RxSwift to 5.0.1 by @pepibumur.
+
+### Added
+
+- Xcode 11 support by @pepibumur.
+
 ## 2.1.3
 
 ### Fixed
