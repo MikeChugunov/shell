@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.source_files = "Sources/RxShell/**/*.{swift}"
 
   s.dependency "Shell", "2.2.0"
-  s.dependency "RxSwift", "5.0.1"
+  s.dependency "RxSwift", "5.0.0"
 end
