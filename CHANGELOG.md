@@ -4,6 +4,9 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 
 ## next version
 
+## 2.2.1
+- Update Framework search paths for using builded XCFrameworks with Carthage
+
 ## 2.2.0
 
 ### Changed
